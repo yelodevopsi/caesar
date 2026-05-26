@@ -1,6 +1,6 @@
 # caesar
 
-A Caesar cipher CLI with support for Scandinavian characters (Æ, Ø, Å), implemented in four languages.
+A Caesar cipher CLI with support for Scandinavian characters (Æ, Ø, Å), implemented in six languages.
 
 ## Alphabet
 
@@ -17,9 +17,11 @@ Both upper and lowercase are supported. All other characters (numbers, punctuati
 | Folder | Language | Run | Test |
 |--------|----------|-----|------|
 | `golang/` | Go 1.23 | `go run . <shift> <file>` | `go test ./...` |
-| `nodejs/` | Node.js | `node caesar.mjs <shift> <file>` | `node --test caesar.test.mjs` |
-| `bun/` | Bun + TypeScript | `bun caesar.ts <shift> <file>` | `bun test` |
-| `python/` | Python 3.12 | `python caesar.py <shift> <file>` | `python -m unittest test_caesar -v` |
+| `dotnet/` | C# / .NET 8 | `dotnet run --project dotnet -- <shift> <file>` | `dotnet test dotnet.tests` |
+| `java/` | Java 21 | `java -cp java/out Caesar <shift> <file>` | `java -cp java/out CaesarTest` |
+| `nodejs/` | Node.js | `node nodejs/caesar.mjs <shift> <file>` | `node --test nodejs/caesar.test.mjs` |
+| `bun/` | Bun + TypeScript | `bun bun/caesar.ts <shift> <file>` | `bun test bun/` |
+| `python/` | Python 3.12 | `python python/caesar.py <shift> <file>` | `python -m unittest test_caesar -v` |
 
 ## Usage
 
@@ -55,7 +57,7 @@ caesar 5 secret.txt -d -o plain_out.txt
 
 ## Benchmarking
 
-Three shared input files are included for benchmarking:
+Four shared input files are included for benchmarking:
 
 | File | Words | Chars |
 |------|-------|-------|
