@@ -18,6 +18,7 @@ Both upper and lowercase are supported. All other characters (numbers, punctuati
 |--------|----------|-----|------|
 | `golang/` | Go 1.23 | `go run . <shift> <file>` | `go test ./...` |
 | `dotnet/` | C# / .NET 8 | `dotnet run --project dotnet -- <shift> <file>` | `dotnet test dotnet.tests` |
+| `winforms/` | C# / .NET 8 WinForms | `dotnet run --project winforms` | — |
 | `java/` | Java 21 | `java -cp java/out Caesar <shift> <file>` | `java -cp java/out CaesarTest` |
 | `nodejs/` | Node.js | `node nodejs/caesar.mjs <shift> <file>` | `node --test nodejs/caesar.test.mjs` |
 | `bun/` | Bun + TypeScript | `bun bun/caesar.ts <shift> <file>` | `bun test bun/` |
@@ -54,6 +55,31 @@ caesar 5 secret.txt -d
 ```sh
 caesar 5 secret.txt -d -o plain_out.txt
 ```
+
+## WinForms GUI (`winforms/`)
+
+A Windows desktop application built on top of the `dotnet/` Caesar cipher library.
+
+**Run:**
+```sh
+dotnet run --project winforms
+```
+
+**Or build a self-contained executable first:**
+```sh
+dotnet publish winforms -c Release -r win-x64 --self-contained
+```
+The binary is written to `winforms/bin/Release/net8.0-windows/win-x64/publish/`.
+
+**Features:**
+
+- Drag and drop a `.txt` file anywhere onto the window to load it
+- Side-by-side **Input** / **Output** panels with scroll
+- **Shift** spinner (1–28) — output updates live as you turn it
+- **Encrypt / Decrypt** radio buttons — output updates live on toggle
+- **Save Output…** button opens a save dialog and writes UTF-8
+
+> Requires Windows. The 29-character alphabet (A–Z + Æ Ø Å) is noted in the info strip at the top of the window.
 
 ## Benchmarking
 

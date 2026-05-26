@@ -8,6 +8,8 @@ dotnet/obj/
 dotnet/publish/
 dotnet.tests/bin/
 dotnet.tests/obj/
+winforms/bin/
+winforms/obj/
 
 # ── Java ───────────────────────────────────────────────────────────────────────
 java/out/
