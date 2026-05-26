@@ -51,11 +51,12 @@ def find(name: str) -> str:
     return exe
 
 CMDS: dict[str, list[str]] = {
-    "go":     [str(go_bin)],
-    "dotnet": [str(DOTNET_BIN)],
-    "nodejs": [find("node"), "nodejs/caesar.mjs"],
-    "bun":    [find("bun"),  "bun/caesar.ts"],
-    "python": [sys.executable, "python/caesar.py"],
+    "go":         [str(go_bin)],
+    "dotnet":     [str(DOTNET_BIN)],
+    "nodejs":     [find("node"), "nodejs/caesar.mjs"],
+    "bun":        [find("bun"),  "bun/caesar.ts"],
+    "python":     [sys.executable, "python/caesar.py"],
+    "powershell": [find("powershell"), "-NoProfile", "-File", "powershell/caesar.ps1"],
 }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
