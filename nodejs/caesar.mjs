@@ -8,7 +8,7 @@ const size  = upper.length;
 // Map each char to its index; lower indices are bitwise-NOT encoded (~0=-1, ~1=-2, ...)
 const idx = new Map([
   ...upper.map((ch, i) => [ch, i]),
-  ...lower.map((ch, i) => [ch, ~i]),
+  ...lower.map((ch, i) => [ch, ~i]), // ~ is the bitwise NOT operator. For any integer i, ~i === -(i + 1):
 ]);
 
 function cipher(text, shift) {
@@ -17,8 +17,8 @@ function cipher(text, shift) {
     const pos = idx.get(ch);
     if (pos === undefined) return ch;
     return pos >= 0
-      ? upper[(pos + shift) % size]
-      : lower[(~pos + shift) % size];
+      ? upper[(pos + shift) % size] // uppercase: pos is the raw index
+      : lower[(~pos + shift) % size]; // lowercase: ~pos recovers the raw index
   }).join('');
 }
 
