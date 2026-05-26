@@ -43,6 +43,19 @@ if dotnet_cmd:
 elif not DOTNET_BIN.exists():
     sys.exit("Error: 'dotnet' not found. Run: dotnet publish dotnet -c Release -o dotnet/publish")
 
+# ── Compile Java ────────────────────────────────────────────────────────────
+javac_cmd = shutil.which("javac")
+java_out  = ROOT / "java" / "out"
+if javac_cmd:
+    print("Compiling Java...")
+    java_out.mkdir(exist_ok=True)
+    subprocess.run(
+        [javac_cmd, "-encoding", "UTF-8", "-d", str(java_out), "java/Caesar.java"],
+        check=True,
+    )
+elif not (java_out / "Caesar.class").exists():
+    sys.exit("Error: 'javac' not found. Compile manually: javac -encoding UTF-8 -d java/out java/Caesar.java")
+
 # ── Commands (shift and file appended at runtime) ─────────────────────────────
 def find(name: str) -> str:
     exe = shutil.which(name)
@@ -51,11 +64,12 @@ def find(name: str) -> str:
     return exe
 
 CMDS: dict[str, list[str]] = {
-    "go":     [str(go_bin)],
-    "dotnet": [str(DOTNET_BIN)],
-    "nodejs": [find("node"), "nodejs/caesar.mjs"],
-    "bun":    [find("bun"),  "bun/caesar.ts"],
-    "python": [sys.executable, "python/caesar.py"],
+    "go":         [str(go_bin)],
+    "dotnet":     [str(DOTNET_BIN)],
+    "java":       [find("java"), "-cp", str(java_out), "Caesar"],
+    "nodejs":     [find("node"), "nodejs/caesar.mjs"],
+    "bun":        [find("bun"),  "bun/caesar.ts"],
+    "python":     [sys.executable, "python/caesar.py"],
 }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
