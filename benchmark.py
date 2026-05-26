@@ -20,6 +20,7 @@ SHIFT = "5"
 RUNS  = 5
 FILES = ["bench_100.txt", "bench_5000.txt", "bench_100000.txt", "bench_1000000.txt"]
 DOTNET_BIN = ROOT / "dotnet" / "publish" / ("dotnet.exe" if platform.system() == "Windows" else "dotnet")
+RUST_BIN   = ROOT / "rust" / "target" / "release" / ("caesar.exe" if platform.system() == "Windows" else "caesar")
 
 # ── Build Go binary ────────────────────────────────────────────────────────────
 go_cmd = shutil.which("go")
@@ -56,6 +57,15 @@ if javac_cmd:
 elif not (java_out / "Caesar.class").exists():
     sys.exit("Error: 'javac' not found. Compile manually: javac -encoding UTF-8 -d java/out java/Caesar.java")
 
+# ── Build Rust Release binary ───────────────────────────────────────────────
+cargo_cmd = shutil.which("cargo")
+if cargo_cmd:
+    print("Building Rust binary...")
+    subprocess.run([cargo_cmd, "build", "--release"], check=True,
+                   cwd=ROOT / "rust", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+elif not RUST_BIN.exists():
+    sys.exit("Error: 'cargo' not found. Build manually: cd rust && cargo build --release")
+
 # ── Commands (shift and file appended at runtime) ─────────────────────────────
 def find(name: str) -> str:
     exe = shutil.which(name)
@@ -64,12 +74,13 @@ def find(name: str) -> str:
     return exe
 
 CMDS: dict[str, list[str]] = {
-    "go":         [str(go_bin)],
-    "dotnet":     [str(DOTNET_BIN)],
-    "java":       [find("java"), "-cp", str(java_out), "Caesar"],
-    "nodejs":     [find("node"), "nodejs/caesar.mjs"],
-    "bun":        [find("bun"),  "bun/caesar.ts"],
-    "python":     [sys.executable, "python/caesar.py"],
+    "go":     [str(go_bin)],
+    "rust":   [str(RUST_BIN)],
+    "dotnet": [str(DOTNET_BIN)],
+    "java":   [find("java"), "-cp", str(java_out), "Caesar"],
+    "nodejs": [find("node"), "nodejs/caesar.mjs"],
+    "bun":    [find("bun"),  "bun/caesar.ts"],
+    "python": [sys.executable, "python/caesar.py"],
 }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
