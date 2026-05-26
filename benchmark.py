@@ -18,7 +18,7 @@ os.chdir(ROOT)
 
 SHIFT = "5"
 RUNS  = 5
-FILES = ["bench_100.txt", "bench_5000.txt", "bench_100000.txt"]
+FILES = ["bench_100.txt", "bench_5000.txt", "bench_100000.txt", "bench_1000000.txt"]
 DOTNET_BIN = ROOT / "dotnet" / "publish" / ("dotnet.exe" if platform.system() == "Windows" else "dotnet")
 
 # ── Build Go binary ────────────────────────────────────────────────────────────

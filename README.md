@@ -62,6 +62,7 @@ Three shared input files are included for benchmarking:
 | `bench_100.txt` | 100 | ~416 |
 | `bench_5000.txt` | 5 000 | ~21 000 |
 | `bench_100000.txt` | 100 000 | ~420 000 |
+| `bench_1000000.txt` | 1 000 000 | ~4 200 000 |
 
 Run the benchmark across all implementations:
 

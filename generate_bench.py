@@ -22,7 +22,7 @@ def gen_text(n_words: int) -> str:
 
 random.seed(42)
 
-for label, count in [("100", 100), ("5000", 5000), ("100000", 100000)]:
+for label, count in [("100", 100), ("5000", 5000), ("100000", 100000), ("1000000", 1000000)]:
     path = f"bench_{label}.txt"
     with open(path, "w", encoding="utf-8") as f:
         f.write(gen_text(count))
