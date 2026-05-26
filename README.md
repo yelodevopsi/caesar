@@ -63,10 +63,10 @@ Three shared input files are included for benchmarking:
 | `bench_5000.txt` | 5 000 | ~21 000 |
 | `bench_100000.txt` | 100 000 | ~420 000 |
 
-Run the benchmark across all implementations (requires Git Bash):
+Run the benchmark across all implementations:
 
 ```sh
-bash benchmark.sh
+python benchmark.py
 ```
 
 This runs each implementation 5 times per file and reports average **characters per second** (including process startup time).
